@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Как я провёл лето</title>
+    <link rel="icon" href="https://cdn3.iconfinder.com/data/icons/pixel-art-small/100/PixelArtIcons-90-1024.png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Навигационная панель */
+        nav {
+            background: linear-gradient(to right, #2c2c2c, #1a1a1a);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background-color: #4dabf7;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            margin: 5px 10px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-btn:hover {
+            background-color: #3b99e0;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-btn.active {
+            background-color: #ff6b6b;
+        }
+        
+        header {
+            background: linear-gradient(to right, #2c2c2c, #1a1a1a);
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: #ccc;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+            display: none;
+        }
+        
+        section.active {
+            display: block;
+        }
+        
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .card {
+            background-color: #2c2c2c;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+        
+        h3 i {
+            margin-right: 15px;
+            color: #4dabf7;
+        }
+        
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+        
+        ul {
+            list-style-type: none;
+            margin: 20px 0;
+        }
+        
+        li {
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+            color: #ddd;
+            font-size: 1.1rem;
+        }
+        
+        li:before {
+            content: "•";
+            color: #4dabf7;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -3px;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ff6b6b;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            max-width: 350px;
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        /* Стили для медиа-панелей */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .media-panel {
+            background: #2c2c2c;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .media-panel:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .media-image {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .media-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .media-panel:hover .media-image img {
+            transform: scale(1.05);
+        }
+        
+        .media-type {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #4dabf7;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 2;
+        }
+        
+        .media-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .media-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .media-info {
+            color: #bbb;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .media-info i {
+            margin-right: 8px;
+            color: #4dabf7;
+        }
+        
+        .media-description {
+            margin-top: 15px;
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+        
+        footer {
+            background-color: #121212;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .highlight {
+            color: #4dabf7;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .nav-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+                margin: 0 5px;
+            }
+            
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигационная панель -->
+    <nav>
+        <div class="container nav-container">
+            <button class="nav-btn active" data-target="main">ГЛАВНОЕ</button>
+            <button class="nav-btn" id="travel-btn">ПОЕЗДКИ</button>
+            <button class="nav-btn" data-target="media">АНИМЕ И ИГРЫ</button>
+            <button class="nav-btn" data-target="it">СМЫСЛ В IT</button>
+            <button class="nav-btn" data-target="suffering">СТРАДАНИЯ</button>
+            <button class="nav-btn" data-target="boast">ПОХВАСТАТЬСЯ</button>
+        </div>
+    </nav>
+    
+    <header>
+        <div class="container">
+            <h1>Как я провёл лето</h1>
+            <p class="subtitle">Три месяца отдыха, развлечений и IT-активностей</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Главный раздел -->
+        <section id="main" class="active">
+            <h2>Летние активности</h2>
+            
+            <div class="card">
+                <h3><i class="fas fa-sun"></i> Чем я занимался этим летом</h3>
+                <p>Лето 2025 года было насыщенным и интересным. Несмотря на то, что я никуда не ездил, мне удалось найти много увлекательных занятий.</p>
+                <p>В основном я сосредоточился на:</p>
+                <ul>
+                    <li>Просмотре интересных аниме</li>
+                    <li>Прохождении компьютерных игр</li>
+                    <li>Изучении IT-технологий и программирования</li>
+                    <li>Немного страданий от жары и работы</li>
+                    <li>И конечно же, было чем похвастаться!</li>
+                </ul>
+                <p>Используйте навигацию выше, чтобы узнать подробности о каждой из активностей!</p>
+            </div>
+            
+            <div class="card">
+                <h3><i class="fas fa-calendar"></i> Лето в цифрах</h3>
+                <p>За три летних месяца я:</p>
+                <ul>
+                    <li>Просмотрел 3 аниме-сериала</li>
+                    <li>Прошёл 5 игр</li>
+                    <li>Собрал 2 ПК</li>
+                    <li>Отыграл 3 D&D кампании в качестве мастера</li>
+                    <li>Провел 300 часов в Таркове</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Раздел медиа -->
+        <section id="media">
+            <h2>Игры и аниме</h2>
+            
+            <div class="media-grid">
+                <!-- Аниме -->
+                <div class="media-panel">
+                    <div class="media-image">
+                        <img src="https://pic.rutubelist.ru/playlist/2025/07/11/69/45/abc8b15f-5e1f-11f0-badb-eaea7777d9cc.jpg" alt="Атака титанов">
+                        <div class="media-type">Аниме</div>
+                    </div>
+                    <div class="media-content">
+                        <h3 class="media-title">Атака титанов</h3>
+                        <div class="media-info"><i class="fas fa-calendar"></i> 2013</div>
+                        <div class="media-info"><i class="fas fa-user"></i> Хадзимэ Исаяма</div>
+                        <div class="media-description">
+                            Эпическая история о выживании человечества в мире, где люди вынуждены прятаться за огромными стенами от титанов. 
+                            Сложные персонажи, непредсказуемый сюжет и глубокая философия.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="media-panel">
+                    <div class="media-image">
+                        <img src="https://static.giga.de/wp-content/uploads/2019/07/Goblin-Slayer-Goblins-Crown-Season-2-White-Fox.jpg">
+                        <div class="media-type">Аниме</div>
+                    </div>
+                    <div class="media-content">
+                        <h3 class="media-title">Убийца Гоблинов</h3>
+                        <div class="media-info"><i class="fas fa-calendar"></i> 2018</div>
+                        <div class="media-info"><i class="fas fa-user"></i> Кумо Кагу</div>
+                        <div class="media-description">
+                            Мрачная история о юном воине, посвятившем жизнь истреблению гоблинов. 
+                            Жесткий и реалистичный взгляд на фэнтези-мир, где даже слабые монстры могут быть чрезвычайно опасны.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="media-panel">
+                    <div class="media-image">
+                        <img src="https://s.yimg.com/ny/api/res/1.2/IPyheWVzYjei5YXx4CNwyQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyNDI7aD02OTk-/https://media.zenfs.com/en/comingsoon_net_477/b5bc8aefc9447899ed2c987dcd8cb24e" alt="Берсерк">
+                        <div class="media-type">Аниме</div>
+                    </div>
+                    <div class="media-content">
+                        <h3 class="media-title">Берсерк</h3>
+                        <div class="media-info"><i class="fas fa-calendar"></i> 1997</div>
+                        <div class="media-info"><i class="fas fa-user"></i> Кэнтаро Миура</div>
+                        <div class="media-description">
+                            Культовая мрачная фэнтези-сага о наемнике Гатсе, ищущем свою цель в жизни. 
+                            Философская глубина, проработанный мир и запоминающиеся персонажи сделали это аниме классикой.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Игры -->
+                <div class="media-panel">
+                    <div class="media-image">
+                        <img src="https://avatars.mds.yandex.net/get-mpic/12591611/2a00000194da192c1d9bdbeca99221caf1dc/orig" alt="Kingdom Come: Deliverance 2">
+                        <div class="media-type">Игра</div>
+                    </div>
+                    <div class="media-content">
+                        <h3 class="media-title">Kingdom Come: Deliverance 2</h3>
+                        <div class="media-info"><i class="fas fa-calendar"></i> 2024</div>
+                        <div class="media-info"><i class="fas fa-user"></i> Warhorse Studios</div>
+                        <div class="media-description">
+                            Продолжение исторической RPG, действие которой происходит в средневековой Богемии. 
+                            Реалистичный геймплей, глубокий сюжет и внимание к историческим деталям.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="media-panel">
+                    <div class="media-image">
+                        <img src="https://img.ixbt.site/live/topics/preview/00/10/75/92/5ef005ccae.jpg" alt="Path of Exile 2">
+                        <div class="media-type">Игра</div>
+                    </div>
+                    <div class="media-content">
+                        <h3 class="media-title">Path of Exile 2</h3>
+                        <div class="media-info"><i class="fas fa-calendar"></i> 2024</div>
+                        <div class="media-info"><i class="fas fa-user"></i> Grinding Gear Games</div>
+                        <div class="media-description">
+                            Продолжение культовой ARPG с огромным деревом пассивных навыков и глубокой системой крафтинга. 
+                            Новые классы, улучшенная графика и механика боя.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="media-panel">
+                    <div class="media-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/3/36/KeepDrivingLogo.PNG" alt="Keep Driving">
+                        <div class="media-type">Игра</div>
+                    </div>
+                    <div class="media-content">
+                        <h3 class="media-title">Keep Driving</h3>
+                        <div class="media-info"><i class="fas fa-calendar"></i> 2023</div>
+                        <div class="media-info"><i class="fas fa-user"></i> Pixel Perfect Studios</div>
+                        <div class="media-description">
+                            Расслабляющая игра-симулятор вождения с красивыми пейзажами и умиротворяющей атмосферой. 
+                            Идеальна для снятия стресса после долгого дня.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="media-panel">
+                    <div class="media-image">
+                        <img src="https://images.cybersport.ru/images/as-is/plain/07/07e905f4-6a9b-4e1f-babb-0459d689995b.jpg@jpg" alt="Escape From Tarkov">
+                        <div class="media-type">Игра</div>
+                    </div>
+                    <div class="media-content">
+                        <h3 class="media-title">Eescape From Tarkov</h3>
+                        <div class="media-info"><i class="fas fa-calendar"></i> 2016-н.в.</div>
+                        <div class="media-info"><i class="fas fa-user"></i> Battlestate Games</div>
+                        <div class="media-description">
+                            Хардкорный шутер с элементами RPG и выживания. Максимальный реализм, детальная проработка оружия и высочайшая сложность. 
+                            Не прощает ошибок, но дарит незабываемые эмоции.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="media-panel">
+                    <div class="media-image">
+                        <img src="https://store-images.s-microsoft.com/image/apps.61473.13879075332331019.da1cf290-ab60-45cb-891e-71702235fa65.18daa26b-682e-491f-8e1c-87533a00b5b3" alt="Crusader Kings 3">
+                        <div class="media-type">Игра</div>
+                    </div>
+                    <div class="media-content">
+                        <h3 class="media-title">Crusader Kings 3</h3>
+                        <div class="media-info"><i class="fas fa-calendar"></i> 2020</div>
+                        <div class="media-info"><i class="fas fa-user"></i> Paradox Interactive</div>
+                        <div class="media-description">
+                            Глобальная стратегия средневековой династии, где вы управляете не государством, а правящей семьей. 
+                            Интриги, войны, браки и предательства - все средства хороши для укрепления власти вашего рода.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Остальные разделы остаются без изменений -->
+        <!-- Раздел IT -->
+        <section id="it">
+            <h2>Смысл IT</h2>
+            
+            <div class="card">
+                <h3><i class="fas fa-laptop-code"></i> Что я делал летом, связанное с IT</h3>
+                <p>Лето было продуктивным временем, но не для моего развития в IT-сфере:</p>
+                <ul>
+                    <li> Начал изучать основы веб-разработки, но устал</li>
+                    <li>Познакомился с unity</li>
+                    <li>Начал изучать c# для разработки игр</li>
+                    <li>Создал небольшой прототип игры</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3><i class="fas fa-lightbulb"></i> IT-открытия лета</h3>
+                <p>За лето я сделал несколько интересных открытий в мире технологий:</p>
+                <ul>
+                    <li>Узнал о возможностях нейросетей</li>
+                    <li>Познакомился с Visual Studio Code</li>
+                    <li>Исследовал мир ассетов Unity</li>
+                    <li>Углубился в основы VR</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Раздел страданий -->
+        <section id="suffering">
+            <h2>Страдания</h2>
+            
+            <div class="card">
+                <h3><i class="fas fa-fire"></i> От жары</h3>
+                <p>Лето 2025 выдалось невероятно жарким, что доставляло некоторые неудобства:</p>
+                <ul>
+                    <li>Приходилось постоянно включать кондиционер</li>
+                    <li>Компьютер всё время перегревался</li>
+                    <li>Сложно было работать на улице</li>
+                    <li>Постоянно хотелось холодных напитков</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3><i class="fas fa-bored"></i> От работы</h3>
+                <p>Иногда летние дни казались слишком тяжёлыми:</p>
+                <ul>
+                    <li>Обслуживал детей по 12 часов в парке атракционов</li>
+                    <li>Носил тяжёлые коробки на складе по 12 часов в день</li>
+                    <li>Копал откосы на дороге по 12 часов в +33 градуса</li>
+                  
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Раздел похвастаться -->
+        <section id="boast">
+            <h2>Похвастаться</h2>
+            
+            <div class="card">
+                <h3><i class="fas fa-trophy"></i> Достижения</h3>
+                <p>Этим летом мне было чем гордиться:</p>
+                <ul>
+                    <li>Собрал игровой ПК с RTX 3080 и Ryzen 7 7700</li>
+                    <li>Собрал ещё один ПК с RX 6700 xt и Ryzen 5 5600</li>
+                    <li>Почти прошёл BG3</li>
+                    <li>Выполнил все квесты смотрителя в Таркове</li>
+                    <li>Привёл Сеньора Гилтера к власти в Hearts of Iron 4</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3><i class="fas fa-star"></i> Умения</h3>
+                <p>За лето я приобрел несколько полезных навыков:</p>
+                <ul>
+                    <li>Освоил навыки гейм дизайна</li>
+                    <li>Научился работать со Stable Diffusion</li>
+                    <li>Получил базовые навыки работы с unity</li>
+                    <li>Изучал язык программирования c#</li>
+                    <li>Изучал возможности DeepSeek</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Уведомление о поездках -->
+    <div class="notification" id="travel-notification">
+        <button class="close-btn" id="close-notification">&times;</button>
+        <h3>К сожалению!</h3>
+        <p>Создатель сайта не особо любит поездки, поэтому вместо путешествий он наслаждался комфортом дома!</p>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>Лето 2025 · Интересно и с пользой</p>
+        </div>
+    </footer>
+
+    <script>
+        // Переключение между разделами
+        document.addEventListener('DOMContentLoaded', function() {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const sections = document.querySelectorAll('section');
+            const travelBtn = document.getElementById('travel-btn');
+            const travelNotification = document.getElementById('travel-notification');
+            const closeNotification = document.getElementById('close-notification');
+            
+            // Функция для переключения разделов
+            function switchSection(targetId) {
+                sections.forEach(section => {
+                    section.classList.remove('active', 'visible');
+                });
+                
+                navButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                if (targetId !== 'travel') {
+                    document.getElementById(targetId).classList.add('active');
+                    setTimeout(() => {
+                        document.getElementById(targetId).classList.add('visible');
+                    }, 50);
+                    
+                    document.querySelector(`[data-target="${targetId}"]`).classList.add('active');
+                }
+            }
+            
+            // Обработчики для кнопок навигации
+            navButtons.forEach(button => {
+                if (button.id !== 'travel-btn') {
+                    button.addEventListener('click', function() {
+                        const targetId = this.getAttribute('data-target');
+                        switchSection(targetId);
+                    });
+                }
+            });
+            
+            // Обработчик для кнопки "Поездки"
+            travelBtn.addEventListener('click', function() {
+                travelNotification.style.display = 'block';
+                
+                // Автоматическое скрытие уведомления через 5 секунд
+                setTimeout(() => {
+                    travelNotification.style.display = 'none';
+                }, 5000);
+            });
+            
+            // Закрытие уведомления
+            closeNotification.addEventListener('click', function() {
+                travelNotification.style.display = 'none';
+            });
+            
+            // Анимация появления элементов при прокрутке
+            const contentElements = document.querySelectorAll('.card, .media-panel');
+            
+            function isElementInViewport(el) {
+                const rect = el.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 &&
+                    rect.bottom >= 0
+                );
+            }
+            
+            function checkScroll() {
+                contentElements.forEach(element => {
+                    if (isElementInViewport(element)) {
+                        element.style.opacity = "1";
+                        element.style.transform = "translateY(0)";
+                    }
+                });
+            }
+            
+            // Инициализация стилей для анимации
+            contentElements.forEach(element => {
+                element.style.opacity = "0";
+                element.style.transform = "translateY(50px)";
+                element.style.transition = "opacity 1s ease, transform 1s ease";
+            });
+            
+            // Показываем главный раздел при загрузке
+            switchSection('main');
+            
+            // Проверяем при загрузке и при прокрутке
+            window.addEventListener('load', checkScroll);
+            window.addEventListener('scroll', checkScroll);
+            setTimeout(checkScroll, 500);
+        });
+    </script>
+</body>
+</html>
